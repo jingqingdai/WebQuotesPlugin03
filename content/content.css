@@ -1,0 +1,30 @@
+/**
+ * 金句卡片生成器 - 内容样式
+ * 定义浮动按钮和卡片生成器容器的样式
+ */
+
+/* 浮动按钮样式 */
+#quote-card-button {
+  animation: fade-in 0.2s ease-out;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+#quote-card-button:hover {
+  transform: scale(1.1);
+  background-color: #1a73e8 !important;
+}
+
+/* 卡片生成器容器样式 */
+#quote-card-generator-container {
+  animation: fade-in 0.3s ease-out;
+}
+
+/* 动画效果 */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+} 

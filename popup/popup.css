@@ -1,0 +1,316 @@
+/**
+ * 金句卡片生成器 - 弹出页面样式
+ */
+
+/* 字体定义 - 首先使用assets文件夹中的字体文件，如果失败则使用系统字体 */
+@font-face {
+  font-family: 'SourceHanSerif';
+  src: url('../assets/fonts/SourceHanSerif.ttf') format('truetype'),
+       local('Source Han Serif'), local('Noto Serif CJK SC'), local('SimSun'), local('宋体'), local('serif');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SourceHanSans';
+  src: url('../assets/fonts/SourceHanSans.ttf') format('truetype'),
+       local('Source Han Sans'), local('Noto Sans CJK SC'), local('Microsoft YaHei'), local('微软雅黑'), local('sans-serif');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ZKGDBold';
+  src: url('../assets/fonts/ZKGDBold.ttf') format('truetype'),
+       local('Microsoft YaHei Bold'), local('微软雅黑 Bold'), local('SimHei'), local('黑体'), local('sans-serif');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OPPOSans';
+  src: url('../assets/fonts/OPPOSans.ttf') format('truetype'),
+       local('OPPO Sans'), local('Helvetica'), local('Arial'), local('sans-serif');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('../assets/fonts/AlibabaPuHuiTi.ttf') format('truetype'),
+       local('Alibaba PuHuiTi'), local('PingFang SC'), local('苹方-简'), local('sans-serif');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FZLantingHei';
+  src: url('../assets/fonts/FZLantingHei.ttf') format('truetype'),
+       local('FZLanTingHei'), local('Lantinghei SC'), local('黑体-简'), local('sans-serif');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 基础样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'SourceHanSans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: #333;
+  background-color: #f5f5f5;
+  width: 600px;
+  height: 450px;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+header {
+  padding: 15px;
+  background-color: #4285f4;
+  color: white;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 1.4em;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 1em;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+footer {
+  padding: 12px 15px;
+  background-color: #f0f0f0;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 卡片预览 */
+.card-preview-container {
+  flex: 1;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eaeaea;
+}
+
+.card-preview {
+  width: 260px;
+  height: 260px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  transition: all 0.3s ease;
+  transform: translateZ(0); /* 启用硬件加速 */
+  backface-visibility: hidden; /* 优化渲染 */
+  will-change: transform; /* 提示浏览器将会变化 */
+}
+
+.quote-text {
+  width: 100%;
+  max-height: 100%;
+  overflow-wrap: break-word;
+  white-space: pre-line;
+  line-height: 1.6;
+  transform: translateZ(0); /* 确保文本正确渲染 */
+}
+
+/* 编辑器控件 */
+.editor-container {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background-color: white;
+}
+
+.editor-section {
+  margin-bottom: 20px;
+}
+
+.theme-selector,
+.align-selector {
+  display: flex;
+  gap: 8px;
+}
+
+.background-selector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.font-selector {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+/* 按钮样式 */
+.theme-btn,
+.font-btn,
+.align-btn {
+  padding: 6px 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85em;
+  transition: all 0.2s ease;
+}
+
+.theme-btn:hover,
+.font-btn:hover,
+.align-btn:hover {
+  background-color: #e9e9e9;
+}
+
+.theme-btn.active,
+.font-btn.active,
+.align-btn.active {
+  background-color: #4285f4;
+  color: white;
+  border-color: #4285f4;
+}
+
+/* 背景选项 */
+.bg-option {
+  height: 40px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.bg-option.active {
+  border-color: #4285f4;
+  transform: scale(1.05);
+}
+
+.bg-option[data-bg="bg1"] { background: linear-gradient(135deg, #f5f7fa, #c3cfe2); }
+.bg-option[data-bg="bg2"] { background: linear-gradient(135deg, #e0c3fc, #8ec5fc); }
+.bg-option[data-bg="bg3"] { background: linear-gradient(135deg, #ffecd2, #fcb69f); }
+.bg-option[data-bg="bg4"] { background: linear-gradient(135deg, #a1c4fd, #c2e9fb); }
+.bg-option[data-bg="bg5"] { background: linear-gradient(135deg, #fdfcfb, #e2d1c3); }
+.bg-option[data-bg="bg6"] { background: linear-gradient(135deg, #09203f, #537895); }
+
+/* 导出选项 */
+.export-options {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.format-selector,
+.quality-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85em;
+}
+
+select, input[type="range"] {
+  border: 1px solid #ddd;
+  padding: 4px;
+  border-radius: 3px;
+}
+
+.export-btn {
+  padding: 8px 16px;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.2s ease;
+}
+
+.export-btn:hover {
+  background-color: #3367d6;
+}
+
+/* 主题样式 */
+.card-preview[data-theme="simple"] {
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
+.card-preview[data-theme="retro"] {
+  background-color: #f9f5e9;
+  border: 8px solid #e8dec1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+}
+
+.card-preview[data-theme="modern"] {
+  background-color: white;
+  border: 1px solid #444;
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+}
+
+/* 主题特定文字样式 */
+.card-preview[data-theme="simple"] .quote-text {
+  font-weight: normal;
+}
+
+.card-preview[data-theme="retro"] .quote-text {
+  font-weight: normal;
+  color: #5a4a2f;
+}
+
+.card-preview[data-theme="modern"] .quote-text {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: #292929;
+}
+
+/* 提示弹窗 */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+} 
